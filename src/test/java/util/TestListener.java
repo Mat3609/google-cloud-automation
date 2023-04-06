@@ -52,12 +52,11 @@ public class TestListener implements ITestListener {
     }
 
     private void saveScreenshot() {
-        File screenCapture = ((TakesScreenshot) DriverSingleton
-                .getDriver())
-                .getScreenshotAs(OutputType.FILE);
+        TakesScreenshot scrShot = ((TakesScreenshot) DriverSingleton.getDriver());
+        File scrFile = scrShot.getScreenshotAs(OutputType.FILE);
 
         try {
-            FileUtils.copyFile(screenCapture, new File(
+            FileUtils.copyFile(scrFile, new File(
                     ".//target/screenshots/" +
                             getCurrentTimeAsString() +
                             ".png"));
@@ -68,7 +67,7 @@ public class TestListener implements ITestListener {
 
 
     private String getCurrentTimeAsString() {
-        DateTimeFormatter formatter =DateTimeFormatter.ofPattern("uuuu-MM-dd_HH-mm-ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd_HH-mm-ss");
         return ZonedDateTime.now().format(formatter);
     }
 }

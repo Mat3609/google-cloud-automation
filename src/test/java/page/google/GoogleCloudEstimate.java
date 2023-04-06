@@ -13,56 +13,54 @@ import org.openqa.selenium.support.FindBy;
 import waits.Wait;
 
 
-public class EstimatePage extends AbstractPage {
+public class GoogleCloudEstimate extends AbstractPage {
     private final Logger logger = LogManager.getRootLogger();
-    String handle = driver.getWindowHandle();
 
     @FindBy(xpath = "//div[contains(text(),'Provisioning model: Regular')]")
-    WebElement provisioningModelRegular;
+    private WebElement provisioningModelRegular;
 
     @FindBy(xpath = "//div[contains(text(),'Instance type: n1-standard-8')]")
-    WebElement instanceType;
+    private WebElement instanceType;
 
     @FindBy(xpath = "//div[contains(text(),'Region: Frankfurt')]")
-    WebElement region;
+    private WebElement region;
 
     @FindBy(xpath = "//div[contains(text(),'Local SSD: 2x375 GiB')]")
-    WebElement localSSD;
+    private WebElement localSSD;
 
     @FindBy(xpath = "//div[contains(text(),' Commitment term: 1 Year')]")
-    WebElement commitmentTerm;
+    private WebElement commitmentTerm;
 
     @FindBy(xpath = "//b[contains(text(),'Total Estimated Cost')]")
-    WebElement totalCostText;
-
+    private WebElement totalCostText;
 
     @FindBy(xpath = "//*[@id='Email Estimate']/span")
-    WebElement emailEstimate;
+    private WebElement emailEstimateBtn;
 
     @FindBy(xpath = "//md-input-container//label[contains(text(),'Email')]/following-sibling::input")
-    WebElement emailField;
+    private WebElement emailField;
 
     @FindBy(xpath = "//button[contains(text(),'Send Email')]")
-    WebElement sendEmailBtn;
+    private WebElement sendEmailBtn;
 
-    EmailHomePage emailHomePage;
+    private EmailHomePage emailHomePage;
 
-    public EstimatePage(WebDriver driver) {
+    public GoogleCloudEstimate(WebDriver driver) {
         super(driver);
     }
 
 
-    public EstimatePage sendEstimateByEmail() {
+    public GoogleCloudEstimate sendEstimateByEmail() {
         emailHomePage = new EmailHomePage(driver)
                 .openPageInNewTab()
                 .copyATemporaryEmailAddress();
 
-        TabsHelper.switchingTabs(driver, handle);
+        TabsHelper.switchingTabs(driver, GoogleCloudPage.handleCloud);
 
-        Wait.frameToBeAvailableAndSwitchToIt(CalculatorPage.IFRAME_1);
-        Wait.frameToBeAvailableAndSwitchToIt(CalculatorPage.IFRAME_2);
+        Wait.frameToBeAvailableAndSwitchToIt(GoogleCloudPage.IFRAME_1);
+        Wait.frameToBeAvailableAndSwitchToIt(GoogleCloudPage.IFRAME_2);
 
-        Wait.elementToBeClickable(emailEstimate).click();
+        Wait.elementToBeClickable(emailEstimateBtn).click();
         Wait.elementToBeClickable(emailField).sendKeys(Keys.CONTROL, "v");
         Wait.elementToBeClickable(sendEmailBtn).click();
         return this;
@@ -70,14 +68,14 @@ public class EstimatePage extends AbstractPage {
 
 
     public boolean compareCostByEmailAndCalculator() {
-        String calcCost = RegexHelper.getText(totalCostText, "(?<=USD)(.*)(?=per)");
+        String cloudCost = RegexHelper.changeText(totalCostText, "(?<=USD)(.*)(?=per)");
 
-        TabsHelper.switchingTabs(driver, emailHomePage.HANDLE_EMAIL);
+        TabsHelper.switchingTabs(driver, EmailHomePage.HANDLE_EMAIL);
 
         String emailCost = emailHomePage.getCost();
         System.out.println(emailCost);
-        System.out.println(calcCost);
+        System.out.println(cloudCost);
 
-        return calcCost.equals(emailCost);
+        return cloudCost.equals(emailCost);
     }
 }

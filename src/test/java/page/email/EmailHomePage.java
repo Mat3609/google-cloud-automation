@@ -12,23 +12,25 @@ import waits.Wait;
 
 public class EmailHomePage extends AbstractPage {
     private String url = "https://yopmail.com/ru/";
-    public static String HANDLE_EMAIL = "";
+    public static String HANDLE_EMAIL;
     private final Logger logger = LogManager.getRootLogger();
 
-    @FindBy(xpath = "//*[@id=\"listeliens\"]/a[1]/div[2]/h3")
-    WebElement createTemporaryEmailBtn;
+    @FindBy(xpath = "//iframe[@name='ifmail']")
+    public WebElement frame;
+
+    @FindBy(xpath = "//*[@id='listeliens']/a[1]/div[2]/h3")
+    private WebElement createTemporaryEmailBtn;
 
     @FindBy(id = "cprnd")
-    WebElement copyEmailBtn;
+    private WebElement copyEmailBtn;
 
     @FindBy(xpath = "/html/body/div/div[2]/main/div/div[2]/div/div[1]/div[2]/button[2]")
-    WebElement checkEmailBtn;
+    private WebElement checkEmailBtn;
 
     @FindBy(xpath = "//h3[contains(text(),'USD 4,024.56')]")
-    WebElement totalCost;
+    private WebElement totalCost;
 
-    @FindBy(xpath = "//iframe[@name='ifmail']")
-    WebElement frame;
+
 
     public EmailHomePage(WebDriver driver) {
         super(driver);
@@ -65,7 +67,7 @@ public class EmailHomePage extends AbstractPage {
         driver.navigate().refresh();
         Wait.frameToBeAvailableAndSwitchToIt(frame);
         Wait.elementToBeClickable(totalCost);
-        return RegexHelper.getText(totalCost, "(?<=USD)(.*)(?=)");
+        return RegexHelper.changeText(totalCost, "(?<=USD)(.*)(?=)");
     }
 
 

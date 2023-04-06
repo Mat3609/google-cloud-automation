@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import page.AbstractPage;
 
-public class CloudGoogleHomePage extends AbstractPage {
+public class GoogleCloudHomePage extends AbstractPage {
     private final String URL = "https://cloud.google.com/";
     private final Logger logger = LogManager.getRootLogger();
 
@@ -18,18 +18,18 @@ public class CloudGoogleHomePage extends AbstractPage {
     private WebElement searchBtn;
 
 
-    public CloudGoogleHomePage(WebDriver driver) {
+    public GoogleCloudHomePage(WebDriver driver) {
         super(driver);
     }
 
 
-    public CloudGoogleHomePage openPage() {
+    public GoogleCloudHomePage openPage() {
         driver.get(URL);
         logger.info("Page is open!");
         return this;
     }
 
-    public SearchingResultsPage searchString(String searchQuery) {
+    public SearchingResultsPage search(String searchQuery) {
         searchBtn.sendKeys(searchQuery, Keys.ENTER);
         return new SearchingResultsPage(driver);
     }

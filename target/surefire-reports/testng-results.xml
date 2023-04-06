@@ -2,24 +2,24 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-02-11T11:31:12 MSK" name="Smoke" finished-at="2023-02-11T11:31:29 MSK" duration-ms="17456">
+  <suite started-at="2023-04-05T16:37:33 MSK" name="Smoke" finished-at="2023-04-05T16:37:49 MSK" duration-ms="15552">
     <groups>
     </groups>
-    <test started-at="2023-02-11T11:31:12 MSK" name="UserAccess" finished-at="2023-02-11T11:31:29 MSK" duration-ms="17456">
-      <class name="test.GoogleCloudSearchResults">
-        <test-method is-config="true" signature="createDriver()[pri:0, instance:test.GoogleCloudSearchResults@6eda5c9]" started-at="2023-02-11T11:31:12 MSK" name="createDriver" finished-at="2023-02-11T11:31:13 MSK" duration-ms="1242" status="PASS">
+    <test started-at="2023-04-05T16:37:33 MSK" name="UserAccess" finished-at="2023-04-05T16:37:49 MSK" duration-ms="15552">
+      <class name="test.GoogleCloudSearchResultsTest">
+        <test-method is-config="true" signature="createDriver()[pri:0, instance:test.GoogleCloudSearchResultsTest@5677323c]" started-at="2023-04-05T16:37:34 MSK" name="createDriver" finished-at="2023-04-05T16:37:39 MSK" duration-ms="5028" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- createDriver -->
-        <test-method signature="commonSearchResultsNotEmpty()[pri:0, instance:test.GoogleCloudSearchResults@6eda5c9]" started-at="2023-02-11T11:31:13 MSK" name="commonSearchResultsNotEmpty" description="JIRA-7566" finished-at="2023-02-11T11:31:29 MSK" duration-ms="16070" status="PASS">
+        <test-method signature="commonSearchResultsNotEmpty()[pri:0, instance:test.GoogleCloudSearchResultsTest@5677323c]" started-at="2023-04-05T16:37:39 MSK" name="commonSearchResultsNotEmpty" description="JIRA-7566" finished-at="2023-04-05T16:37:48 MSK" duration-ms="9668" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- commonSearchResultsNotEmpty -->
-        <test-method is-config="true" signature="browserClose()[pri:0, instance:test.GoogleCloudSearchResults@6eda5c9]" started-at="2023-02-11T11:31:29 MSK" name="browserClose" finished-at="2023-02-11T11:31:29 MSK" duration-ms="126" status="PASS">
+        <test-method is-config="true" signature="browserClose()[pri:0, instance:test.GoogleCloudSearchResultsTest@5677323c]" started-at="2023-04-05T16:37:48 MSK" name="browserClose" finished-at="2023-04-05T16:37:49 MSK" duration-ms="767" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- browserClose -->
-      </class> <!-- test.GoogleCloudSearchResults -->
+      </class> <!-- test.GoogleCloudSearchResultsTest -->
     </test> <!-- UserAccess -->
   </suite> <!-- Smoke -->
 </testng-results>

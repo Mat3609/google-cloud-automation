@@ -26,9 +26,4 @@ public class SearchingResultsPage extends AbstractPage {
         return searchResults.size();
     }
 
-    public CalculatorPage openNewPage() {
-        Wait.elementToBeClickable(titlePage);
-        Wait.JQueryAJAXsCompleted();
-        return new CalculatorPage(driver);
-    }
 }

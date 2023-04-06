@@ -2,20 +2,20 @@ package test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page.google.CalculatorPage;
+import page.google.GoogleCloudPage;
 
 
 public class GoogleCloudCostTest extends CommonConditions {
 
     @Test
     public void theCostInTheCalculatorIsEqualToTheCostInTheMail() {
-        boolean emailEqualsCalculator = new CalculatorPage(driver)
-                .openCalcPage()
+        boolean costMatches = new GoogleCloudPage(driver)
+                .openPage()
                 .fillInTheFields("4")
                 .addToEstimate()
                 .sendEstimateByEmail()
                 .compareCostByEmailAndCalculator();
 
-                Assert.assertTrue(emailEqualsCalculator, "Amounts vary!");
+                Assert.assertTrue(costMatches, "Amounts vary!");
     }
 }

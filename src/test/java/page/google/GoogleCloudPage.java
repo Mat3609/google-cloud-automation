@@ -9,25 +9,27 @@ import page.AbstractPage;
 import waits.Wait;
 
 
-public class CalculatorPage extends AbstractPage {
+public class GoogleCloudPage extends AbstractPage {
     private final Logger logger = LogManager.getRootLogger();
+    private static final String GOOGLE_CLOUD_URL = "https://cloud.google.com/products/calculator";
+    public static String handleCloud;
 
     @FindBy(xpath = "//*[@id='cloud-site']/devsite-iframe/iframe")
-    protected static WebElement IFRAME_1;
+    public static WebElement IFRAME_1;
 
     @FindBy(xpath = "//iframe[@id='myFrame']")
-    protected static WebElement IFRAME_2;
+    public static WebElement IFRAME_2;
 
-    @FindBy(id = "input_92")
+    @FindBy(id = "input_95")
     private WebElement instancesArea;
 
-    @FindBy(id = "select_value_label_87")
+    @FindBy(id = "select_120")
     private WebElement seriesDropDown;
 
     @FindBy(xpath = "//div[contains(text(),'N1')]")
     private WebElement seriesBtn;
 
-    @FindBy(id = "select_value_label_88")
+    @FindBy(id = "select_value_label_91")
     private WebElement machineTypeDropDown;
 
     @FindBy(xpath = "//md-option[@value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']/div")
@@ -57,10 +59,10 @@ public class CalculatorPage extends AbstractPage {
     @FindBy(xpath = "//md-select[@placeholder='Datacenter location']/md-select-value/span/div[@class='md-text ng-binding']")
     private WebElement datacenterLocationDropDown;
 
-    @FindBy(xpath = "//md-select-menu[@class='md-overflow']//md-option/div[contains(text(),'Frankfurt (europe-west3)')]")
+    @FindBy(xpath = "//md-select-menu[@class='_md md-overflow']//md-option/div[contains(text(),'Frankfurt (europe-west3)')]")
     private WebElement datacenterLocationBtn;
 
-    @FindBy(xpath = "//*[@id='select_value_label_91']/span[1]")
+    @FindBy(id = "select_value_label_94")
     private WebElement  commitUsageDropDown;
 
     @FindBy(xpath = "//div[@class='md-select-menu-container md-active md-clickable']//md-option[@class='md-ink-ripple']/div[contains(text(),'1 Year')]")
@@ -70,20 +72,21 @@ public class CalculatorPage extends AbstractPage {
     private WebElement addToEstimateBtn;
 
 
-    public CalculatorPage(WebDriver driver) {
+    public GoogleCloudPage(WebDriver driver) {
         super(driver);
     }
 
 
-    public CalculatorPage openCalcPage() {
-        driver.get("https://cloud.google.com/products/calculator");
+    public GoogleCloudPage openPage() {
+        driver.get(GOOGLE_CLOUD_URL);
+        handleCloud = driver.getWindowHandle();
         return this;
     }
 
 
-    public CalculatorPage fillInTheFields(String instances) {
-        switchToFrame()
-                .fillInInstances(instances)
+    public GoogleCloudPage fillInTheFields(String instances) {
+                 switchToFrame()
+                .setInstances(instances)
                 .setSeriesAndMachineType()
                 .addGPUs()
                 .setLocalSSD()
@@ -92,19 +95,19 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-    public CalculatorPage switchToFrame() {
+    public GoogleCloudPage switchToFrame() {
         Wait.frameToBeAvailableAndSwitchToIt(IFRAME_1);
         Wait.frameToBeAvailableAndSwitchToIt(IFRAME_2);
         return this;
     }
 
-    public CalculatorPage fillInInstances(String number) {
+    public GoogleCloudPage setInstances(String number) {
         Wait.elementToBeClickable(instancesArea);
         instancesArea.sendKeys(number);
         return this;
     }
 
-    public CalculatorPage setSeriesAndMachineType() {
+    public GoogleCloudPage setSeriesAndMachineType() {
         seriesDropDown.click();
         Wait.elementToBeClickable(seriesBtn);
         seriesBtn.click();
@@ -116,7 +119,7 @@ public class CalculatorPage extends AbstractPage {
 
 
 
-    public CalculatorPage addGPUs() {
+    public GoogleCloudPage addGPUs() {
         addGPUsBtn.click();
         Wait.elementToBeClickable(gpuTypeDropDown);
         gpuTypeDropDown.click();
@@ -129,7 +132,7 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-    public CalculatorPage setLocalSSD() {
+    public GoogleCloudPage setLocalSSD() {
         Wait.elementToBeClickable(localSSdDropDown);
         localSSdDropDown.click();
         Wait.elementToBeClickable(localSSdBtn);
@@ -137,7 +140,7 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-    public CalculatorPage setDataCenterLocation() {
+    public GoogleCloudPage setDataCenterLocation() {
         Wait.elementToBeClickable(datacenterLocationDropDown);
         datacenterLocationDropDown.click();
         Wait.elementToBeClickable(datacenterLocationBtn);
@@ -145,7 +148,7 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-    public CalculatorPage setCommitUsage() {
+    public GoogleCloudPage setCommitUsage() {
         Wait.elementToBeClickable(commitUsageDropDown);
         commitUsageDropDown.click();
         Wait.elementToBeClickable(commitUsageBtn);
@@ -153,10 +156,10 @@ public class CalculatorPage extends AbstractPage {
         return this;
     }
 
-    public EstimatePage addToEstimate() {
+    public GoogleCloudEstimate addToEstimate() {
         Wait.elementToBeClickable(addToEstimateBtn);
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();", addToEstimateBtn);
-        return new EstimatePage(driver);
+        return new GoogleCloudEstimate(driver);
     }
 
 }

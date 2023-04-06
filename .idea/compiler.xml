@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Hurt_Me_Plenty" />
         <module name="google_cloud_automation" />
       </profile>
     </annotationProcessing>
